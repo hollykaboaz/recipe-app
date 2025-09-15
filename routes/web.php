@@ -5,24 +5,27 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $recipePrompt = file_get_contents(__DIR__ . "/../recipe-prompt.txt");
-    ini_set('max_execution_time', 300);
-
+    $videoId = 'z-jyskOCw5w';
 
     $response = Http::withHeaders([
-        'Authorization' => 'Basic 68c729ca0862980f4e9c023a',
+        'Authorization' => 'Basic ' . getenv('YOUTUBE_TRANSCRIPT_API_KEY'),
         'Content-Type'  => 'application/json',
     ])
         ->post("https://www.youtube-transcript.io/api" . '/transcripts', [
-            'ids' => ['uNowLq9fm9I'],
+            'ids' => [$videoId],
         ]);
 
-    $transcriptJson = $response->json();
-    $transcriptText = '';
+    $transcriptJson  = $response->json();
+    $transcriptItems = $transcriptJson[0]['tracks'][0]['transcript'];
+    $transcriptText  = '';
 
-    foreach ($transcriptJson[0]['tracks'][0]['transcript'] as $subtitle) {
+    foreach ($transcriptItems as $subtitle) {
         $transcriptText .= gmdate("i:s", $subtitle['start']) . ': ' . $subtitle['text'] . "\n";
     }
+
+    // Open AI Transcript to Recipe Steps
+    $recipePrompt = file_get_contents(__DIR__ . "/../recipe-prompt.txt");
+    ini_set('max_execution_time', 300);
 
     $client = OpenAI::client(getenv('OPENAI_API_KEY'));
 
@@ -75,10 +78,24 @@ Route::get('/', function () {
         ]
     ]);
 
-    $structuredRecipe = json_decode($response->outputText, true);
-    dd($structuredRecipe);
+    $recipeJson = json_decode($response->outputText, true);
+    $recipe = collect($recipeJson['steps']);
 
-    return Inertia::render('Welcome');
+    $recipe = $recipe->map(function ($step) {
+        list($minutes, $seconds) = explode(':', $step['timestamp']);
+        $step['timestamp_seconds'] = (int)$minutes * 60 + (int)$seconds;
+        return $step;
+    });
+
+    $ingredients = $recipe->pluck('ingredients')->flatten()->unique()->sort()->values();
+
+//    dd($ingredients);
+
+    return Inertia::render('Welcome', [
+        'recipe'  => $recipe,
+        'ingredients' => $ingredients,
+        'videoId' => $videoId,
+    ]);
 })->name('home');
 
 Route::get('dashboard', function () {
