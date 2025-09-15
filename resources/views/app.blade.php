@@ -18,6 +18,7 @@
                 }
             })();
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
         {{-- Inline style to set the HTML background color based on our theme in app.css --}}
         <style>
