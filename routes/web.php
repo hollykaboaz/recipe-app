@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $videoId = 'z-jyskOCw5w';
+    $videoId = 'Ppf6I2c29MM';
 
     $response = Http::withHeaders([
         'Authorization' => 'Basic ' . getenv('YOUTUBE_TRANSCRIPT_API_KEY'),
@@ -88,8 +88,6 @@ Route::get('/', function () {
     });
 
     $ingredients = $recipe->pluck('ingredients')->flatten()->unique()->sort()->values();
-
-//    dd($ingredients);
 
     return Inertia::render('Welcome', [
         'recipe'  => $recipe,
