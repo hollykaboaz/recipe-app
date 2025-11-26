@@ -66,9 +66,17 @@ function updateActiveStep(step, stepIndex) {
                     </form>
 
                 </div>
+                <div
+                    v-if="recipeForm.processing"
+                    class="flex flex-col gap-8 items-center align-middle">
+                    <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybW41ZzBvM2s1cjFnYXNiajVpYjZpOGxocDhwMjFjbGd3dzhwNW8zeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CNocEFcF9IBegtgW3q/giphy.gif"/>
+                    <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
+                        Hold Tight! AI is Cooking...
+                    </p>
+                </div>
 
                 <div
-                    v-if="videoId == null"
+                    v-else-if="videoId == null"
                     class="flex flex-col gap-8 items-center align-middle">
                     <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
                         Welcome to Just Cook (Beta) !
@@ -80,14 +88,7 @@ function updateActiveStep(step, stepIndex) {
                         Coming Soon: Support for Tiktok Recipes!
                     </div>
                 </div>
-                <div
-                    v-else-if="recipeForm.processing"
-                    class="flex flex-col gap-8 items-center align-middle">
-                    <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybW41ZzBvM2s1cjFnYXNiajVpYjZpOGxocDhwMjFjbGd3dzhwNW8zeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CNocEFcF9IBegtgW3q/giphy.gif"/>
-                    <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
-                        Hold Tight! AI is Cooking...
-                    </p>
-                </div>
+
                 <div v-else class="flex flex-col lg:flex-row gap-8">
                     <!-- Youtube Recipe Video -->
                     <div class="flex flex-col gap-4 w-full lg:w-[1000px]">
