@@ -1,7 +1,7 @@
 <script setup lang="js">
 import feather from 'feather-icons';
 import { onMounted, reactive } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import getVideoId from 'get-video-id';
 import Tutorial from './Tutorial.vue';
 
@@ -36,7 +36,6 @@ function updateActiveStep(step, stepIndex) {
 </script>
 
 <template>
-    <Head title="Just Cook"/>
     <div class="min-h-screen overflow-clip bg-orange-50 bg-cover bg-center bg-no-repeat">
         <div class="mx-auto max-w-fit md:max-w-2xl lg:max-w-6xl 2xl:max-w-7xl pt-8 mb:px-0 px-4">
             <div class="flex flex-col gap-8">
