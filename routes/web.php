@@ -1,11 +1,19 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    $videoId = 'Ppf6I2c29MM';
+Route::get('/', function (Request $request) {
+    $videoId = $request->get('videoUrl') ?? 'PmuCEQTy-9E';
+
+    if(!$videoId) {
+        return Inertia::render('Dashboard', [
+            'recipe'       => null,
+            'videoId'      => null,
+        ]);
+    }
 
     $response = Http::withHeaders([
         'Authorization' => 'Basic ' . getenv('YOUTUBE_TRANSCRIPT_API_KEY'),
@@ -23,7 +31,7 @@ Route::get('/', function () {
         $transcriptText .= gmdate("i:s", $subtitle['start']) . ': ' . $subtitle['text'] . "\n";
     }
 
-    // Open AI Transcript to Recipe Steps
+    // Using Open AI to Convert Transcript to Recipe Steps
     $recipePrompt = file_get_contents(__DIR__ . "/../recipe-prompt.txt");
     ini_set('max_execution_time', 300);
 
@@ -42,7 +50,7 @@ Route::get('/', function () {
                 'schema'      => [
                     'type'                 => 'object',
                     'properties'           => [
-                        'steps' => [
+                        'steps'         => [
                             'type'        => 'array',
                             'description' => 'Ordered list of atomic steps to complete the recipe.',
                             'items'       => [
@@ -55,7 +63,17 @@ Route::get('/', function () {
                                     'ingredients' => [
                                         'type'        => 'array',
                                         'description' => 'Only ingredients used in this step; lowercase singular nouns; no invented items; quantities only if explicitly stated.',
-                                        'items'       => ['type' => 'string']
+                                        'items'       => [
+                                            'type'                 => 'object',
+                                            'properties'           => [
+                                                'name' => [
+                                                    'type'        => 'string',
+                                                    'description' => 'Name of the ingredient, lowercase singular noun (e.g., "carrot", "olive oil").'
+                                                ],
+                                            ],
+                                            'required'             => ['name'],
+                                            'additionalProperties' => false
+                                        ]
                                     ],
                                     'description' => [
                                         'type'        => 'string',
@@ -66,7 +84,12 @@ Route::get('/', function () {
                                         'description' => 'Start time of the step in MM:SS'
                                     ],
                                 ],
-                                'required'             => ['title', 'ingredients', 'description', 'timestamp'],
+                                'required'             => [
+                                    'title',
+                                    'ingredients',
+                                    'description',
+                                    'timestamp'
+                                ],
                                 'additionalProperties' => false
                             ]
                         ],
@@ -79,20 +102,18 @@ Route::get('/', function () {
     ]);
 
     $recipeJson = json_decode($response->outputText, true);
-    $recipe = collect($recipeJson['steps']);
+    $recipe     = collect($recipeJson['steps']);
 
     $recipe = $recipe->map(function ($step) {
         list($minutes, $seconds) = explode(':', $step['timestamp']);
         $step['timestamp_seconds'] = (int)$minutes * 60 + (int)$seconds;
+
         return $step;
     });
 
-    $ingredients = $recipe->pluck('ingredients')->flatten()->unique()->sort()->values();
-
     return Inertia::render('Welcome', [
-        'recipe'  => $recipe,
-        'ingredients' => $ingredients,
-        'videoId' => $videoId,
+        'recipe'       => $recipe,
+        'videoId'      => $videoId,
     ]);
 })->name('home');
 
