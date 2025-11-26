@@ -50,7 +50,7 @@ function updateActiveStep(step, stepIndex) {
                         <span class="text-sm font-bold text-[#DD8F47]/50 lowercase"> Straight Dish, No Garnish</span>
                     </div>
 
-                    <p class="font-bold text-[#DD8F47]/50">created by Holly Boaz</p>
+                    <p class="font-bold text-[#DD8F47]/50 text-sm">created by Holly Boaz</p>
                 </div>
 
 
@@ -71,11 +71,14 @@ function updateActiveStep(step, stepIndex) {
                     v-if="videoId == null"
                     class="flex flex-col gap-8 items-center align-middle">
                     <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
-                        Welcome to Just Cook!
+                        Welcome to Just Cook (Beta) !
                     </p>
                     <Tutorial>
-                        <img class="w-96 place-self-center rounded-lg" src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNWpkOWxjMHlrbWxjdjh2cmlvenhvd2Q3bHVlanE5eGZ2bWx2ZGNvZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TWNWo8GgWdDgo8t02X/source.gif"/>
+                        <img class="w-96 place-self-center rounded-lg mb-4 py-4" src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNWpkOWxjMHlrbWxjdjh2cmlvenhvd2Q3bHVlanE5eGZ2bWx2ZGNvZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TWNWo8GgWdDgo8t02X/source.gif"/>
                     </Tutorial>
+                    <div class="bg-blue-50 px-8 py-4 text-blue-900 rounded-lg ring-1 ring-blue-200">
+                        Coming Soon: Support for Tiktok Recipes!
+                    </div>
                 </div>
                 <div
                     v-else-if="recipeForm.processing"
