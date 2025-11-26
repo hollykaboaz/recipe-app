@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (Request $request) {
-    $videoId = $request->get('videoUrl') ?? 'PmuCEQTy-9E';
+    $videoId = $request->get('videoUrl') ?? null;
 
     if(!$videoId) {
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Welcome', [
             'recipe'       => null,
             'videoId'      => null,
         ]);

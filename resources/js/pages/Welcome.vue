@@ -3,6 +3,7 @@ import feather from 'feather-icons';
 import { onMounted, reactive } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import getVideoId from 'get-video-id';
+import Tutorial from './Tutorial.vue';
 
 onMounted(() => {
     feather.replace();
@@ -15,7 +16,7 @@ const props = defineProps({
 
 const state = reactive({
     activeStepIndex: 0,
-    start: props.recipe[0]?.timestamp_seconds || 0,
+    start: props.recipe ? recipe[0] : 0
 });
 
 const recipeForm = useForm({
@@ -66,7 +67,19 @@ function updateActiveStep(step, stepIndex) {
 
                 </div>
 
-                <div class="flex flex-col gap-8 items-center align-middle" v-if="recipeForm.processing">
+                <div
+                    v-if="videoId == null"
+                    class="flex flex-col gap-8 items-center align-middle">
+                    <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
+                        Welcome to Just Cook!
+                    </p>
+                    <Tutorial>
+                        <img class="w-96 place-self-center rounded-lg" src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyNWpkOWxjMHlrbWxjdjh2cmlvenhvd2Q3bHVlanE5eGZ2bWx2ZGNvZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TWNWo8GgWdDgo8t02X/source.gif"/>
+                    </Tutorial>
+                </div>
+                <div
+                    v-else-if="recipeForm.processing"
+                    class="flex flex-col gap-8 items-center align-middle">
                     <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybW41ZzBvM2s1cjFnYXNiajVpYjZpOGxocDhwMjFjbGd3dzhwNW8zeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CNocEFcF9IBegtgW3q/giphy.gif"/>
                     <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
                         Hold Tight! AI is Cooking...
@@ -89,16 +102,7 @@ function updateActiveStep(step, stepIndex) {
                             frameborder="0"
                         ></iframe>
 
-                        <div class="hidden lg:block bg-white rounded-lg px-8 py-4">
-                            <h2 class="font-semibold text-xl mb-4">How to Use the App 🤗</h2>
-                            <ol class="list-disc list-inside flex flex-col gap-3">
-                                <li><span class="mr-2">🔍</span> Paste the URL of the Recipe into the Search box above</li>
-                                <li ><span class="mr-2">🤖</span>Give AI time to extract the recipe steps (NOTE: this could take up to 1-2 minutes depending on the length of the tutorial)</li>
-                                <li><span class="mr-2">👩</span>Happy Cooking! You can see the ingredients for each step and click through the steps :)</li>
-                            </ol>
-
-                            <p class="mt-8 text-sm text-gray-500">Sometimes AI gets things wrong (and that's expected!) Let me know what mistakes are made and I can continue to make this a better app. Send a message to aleahholly@gmail.com</p>
-                        </div>
+                        <Tutorial class="hidden lg:block"/>
 
                         <div class="bg-blue-50 px-8 py-4 text-blue-900 rounded-lg ring-1 ring-blue-200">
                             Support for Tiktok coming soon!
