@@ -39,7 +39,6 @@ function updateActiveStep(step, stepIndex) {
         <div class="mx-auto max-w-fit md:max-w-2xl lg:max-w-6xl 2xl:max-w-7xl pt-8 mb:px-0 px-4">
             <div class="flex flex-col gap-8">
                 <!-- Logo -->
-
                 <div class="flex flex-row items-end justify-between">
                     <div class="flex flex-col leading-tight">
                         <div class="text-3xl font-black text-[#DD8F47]">
@@ -50,7 +49,7 @@ function updateActiveStep(step, stepIndex) {
                         <span class="text-sm font-bold text-[#DD8F47]/50 lowercase"> Straight Dish, No Garnish</span>
                     </div>
 
-                    <p class="font-bold text-orange-300">created by Holly Boaz</p>
+                    <p class="font-bold text-[#DD8F47]/50">created by Holly Boaz</p>
                 </div>
 
 
@@ -67,7 +66,13 @@ function updateActiveStep(step, stepIndex) {
 
                 </div>
 
-                <div class="flex flex-col lg:flex-row gap-8">
+                <div class="flex flex-col gap-8 items-center align-middle" v-if="recipeForm.processing">
+                    <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybW41ZzBvM2s1cjFnYXNiajVpYjZpOGxocDhwMjFjbGd3dzhwNW8zeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CNocEFcF9IBegtgW3q/giphy.gif"/>
+                    <p class="text-3xl font-semibold text-[#DD8F47]/50 ">
+                        Hold Tight! AI is Cooking...
+                    </p>
+                </div>
+                <div v-else class="flex flex-col lg:flex-row gap-8">
                     <!-- Youtube Recipe Video -->
                     <div class="flex flex-col gap-4 w-full lg:w-[1000px]">
                         <iframe
