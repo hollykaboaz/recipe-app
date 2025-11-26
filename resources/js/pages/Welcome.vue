@@ -16,7 +16,7 @@ const props = defineProps({
 
 const state = reactive({
     activeStepIndex: 0,
-    start: props.recipe ? recipe[0] : 0
+    start: props.recipe ? props.recipe[0] : 0
 });
 
 const recipeForm = useForm({

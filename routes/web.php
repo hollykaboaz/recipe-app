@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (Request $request) {
     $videoId = $request->get('videoUrl') ?? null;
 
-    if(!$videoId) {
+    if($videoId == null) {
         return Inertia::render('Welcome', [
             'recipe'       => null,
             'videoId'      => null,
