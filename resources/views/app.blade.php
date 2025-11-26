@@ -31,10 +31,10 @@
             }
         </style>
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'Just Cook') }}</title>
 
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="https://assets.streamlinehq.com/image/private/w_512,h_512,ar_1/f_auto/v1/icons/freebies-freemojis/food-drink/food-drink/cooking-uz7jntvgwcqiw9p0ywwfhg.png?_a=DATAg1AAZAA0" sizes="any">
+        <link rel="icon" href="https://assets.streamlinehq.com/image/private/w_512,h_512,ar_1/f_auto/v1/icons/freebies-freemojis/food-drink/food-drink/cooking-uz7jntvgwcqiw9p0ywwfhg.png?_a=DATAg1AAZAA0" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
