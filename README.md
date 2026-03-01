@@ -11,9 +11,8 @@
 Ever tried making a recipe from scratch? What could wrong right? Well as someone whose constantly trying new recipes - I'll tell you!
 
 - **⏮️ The video moves faster than you**: Constantly having to rewind back the steps mid-stir - Not fun!
-- **🛒 Gathering the Ingredients**: Having to watch the FULL video just to write down your grocery list - time consuming.. or even sometimes before moving to the enxt step not knowing what's needed next before you start.
+- **🛒 Gathering the Ingredients takes FOREVER**: Having to watch the FULL video just to write down your grocery list - time consuming.. or even sometimes before moving to the enxt step not knowing what's needed next before you start.
 - **👩‍🍳Chatty Chefs**: Sometimes you want to get right to the recipe - not sold the latest new kitchen knife
-- 
 
 Well **JustCook** is my solution for that! It's a web application intended to give you your most prized recipes in a chapter style format:
 
@@ -31,15 +30,15 @@ Well **JustCook** is my solution for that! It's a web application intended to gi
 
 **Paste the Youtube Link** of the recipe into the search bar
 
-<img width="500" height="754" alt="Screenshot 2026-02-28 at 6 49 29 PM" src="https://github.com/user-attachments/assets/fc93d1db-0e2e-459c-98c7-78711978783d" />
+<img width="500" height="500" alt="Screenshot 2026-02-28 at 6 49 29 PM" src="https://github.com/user-attachments/assets/fc93d1db-0e2e-459c-98c7-78711978783d" />
 
 **Let A.I brew up a recipe** for you!
 
-<img width="200" height="710" alt="Screenshot 2026-02-28 at 7 07 47 PM" src="https://github.com/user-attachments/assets/898b0580-773b-49ff-b505-5c01101d9187" />
+<img width="500" height="500" alt="Screenshot 2026-02-28 at 7 07 47 PM" src="https://github.com/user-attachments/assets/898b0580-773b-49ff-b505-5c01101d9187" />
 
 **Follow the steps** and happy cooking!
 
-<img width="500" height="689" alt="Screenshot 2026-02-28 at 7 08 31 PM" src="https://github.com/user-attachments/assets/58223f7d-e2f4-4d3e-a5c8-162db0ace0ad" />
+<img width="500" height="500" alt="Screenshot 2026-02-28 at 7 08 31 PM" src="https://github.com/user-attachments/assets/58223f7d-e2f4-4d3e-a5c8-162db0ace0ad" />
 
 
 
